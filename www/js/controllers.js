@@ -43,3 +43,8 @@ angular.module('starter.controllers', [])
   .controller('ServerCtrl', function ($scope) {
 
   })
+
+.controller('ServerSettingCtrl', function($scope, $http, $state) {
+  $scope.server_title = $state.params;
+  console.log($scope.server_title)
+})

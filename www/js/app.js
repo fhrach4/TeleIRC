@@ -50,11 +50,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       })
 
       .state('app.config', {
-        url: '/servers/config',
+        url: '/servers/config/:server',
         views: {
           'menuContent': {
             templateUrl: 'templates/server-config.html',
-            controller: 'ServerCtrl'
+            controller: 'ServerSettingCtrl'
           }
         }
       })
