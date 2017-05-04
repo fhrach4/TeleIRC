@@ -9,42 +9,48 @@ angular.module('starter.controllers', [])
     //});
 
     // Form data for the login modal
-    $scope.loginData = {};
+    // $scope.loginData = {};
 
-    // Create the login modal that we will use later
+    // // Create the login modal that we will use later
     // $ionicModal.fromTemplateUrl('templates/login.html', {
     //   scope: $scope
     // }).then(function (modal) {
     //   $scope.modal = modal;
     // });
 
-    // Triggered in the login modal to close it
-    $scope.closeLogin = function () {
-      $scope.modal.hide();
-    };
+    // // Triggered in the login modal to close it
+    // $scope.closeLogin = function () {
+    //   $scope.modal.hide();
+    // };
 
-    // Open the login modal
-    $scope.login = function () {
-      $scope.modal.show();
-    };
+    // // Open the login modal
+    // $scope.login = function () {
+    //   $scope.modal.show();
+    // };
 
-    // Perform the login action when the user submits the login form
-    $scope.doLogin = function () {
-      console.log('Doing login', $scope.loginData);
+    // // Perform the login action when the user submits the login form
+    // $scope.doLogin = function () {
+    //   console.log('Doing login', $scope.loginData);
 
-      // Simulate a login delay. Remove this and replace with your login
-      // code if using a login system
-      $timeout(function () {
-        $scope.closeLogin();
-      }, 1000);
-    };
+    //   // Simulate a login delay. Remove this and replace with your login
+    //   // code if using a login system
+    //   $timeout(function () {
+    //     $scope.closeLogin();
+    //   }, 1000);
+    // };
   })
 
   .controller('ServerCtrl', function ($scope) {
 
   })
 
-.controller('ServerSettingCtrl', function($scope, $http, $state) {
-  $scope.server_title = $state.params;
-  console.log($scope.server_title)
-})
+  .controller('ServerSettingCtrl', function ($scope, $http, $state) {
+    $scope.server_title = $state.params.server;
+
+    // TODO tempoary hard-coded values
+    $scope.sever_address = "127.0.0.1";
+
+    // debug stuff
+    console.log($state.params);
+    console.log($scope);
+  });

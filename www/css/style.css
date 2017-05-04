@@ -1,1 +1,28 @@
 /* Empty. Add your own CSS if you like */
+
+
+/* Font rules */
+
+.monospace {
+    font-family: monospace;
+}
+
+
+/* centering rules */
+
+.center {
+    margin: 0 auto;
+}
+
+.flex-wrapper-justify {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex90 {
+    width: 90%
+}
+
+.flex10 {
+    width: 10%;
+}

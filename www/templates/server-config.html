@@ -1,5 +1,55 @@
-<ion-view view-title="config">
+<ion-view view-title="Server Settings">
     <ion-content>
-        <h1>{{server_title}}</h1>
+        <h1 class="title">{{server_title}}</h1>
+        <ion-list>
+            <ion-item>
+                <ion-toggle>Timestamps</ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label>Notifications</ion-label>
+                <ion-radio value="full">Full</ion-radio>
+                <ion-radio value="in_app">In-App</ion-radio>
+                <ion-radio value="none">None</ion-radio>
+            </ion-item>
+            <ion-item>
+                <div class="flex-wrapper-justify">
+                    <ion-label class="flex90">Highlights</ion-label>
+                    <button class="button outline button-small flex10">
+                        <i class="icon ion-android-add"></i>
+                    </button>
+                </div>
+                <ion-list>
+                    <ion-item>
+                        Test Highlight
+                    </ion-item>
+                    <ion-item>
+                        Test Highlight 2
+                    </ion-item>
+                </ion-list>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Address</ion-label>
+                <ion-input type="text" value="{{serverAddress}}"></ion-input>
+            </ion-item>
+            <ion-item>
+                <div class="flex-wrapper-justify">
+                    <ion-label>Auto-Join Channels</ion-label>
+                    <button class="button outline button-small flex10">
+                        <i class="icon ion-android-add"></i>
+                        </div>
+                <ion-list>
+                    <ion-item class="monospace">
+                        #general
+                    </ion-item>
+                    <ion-item class="monospace">
+                        #dev
+                    </ion-item>
+                </ion-list>
+            </ion-item>
+        </ion-list>
+        <div class="center">
+            <button class="button button-positive button-full"><i class="icon ion-arrow-down-a"></i> Save</button>
+                    <button class="button button-assertive button-full"><i class="icon ion-android-cancel"></i> Cancel</button>
+                </div>
     </ion-content>
 </ion-view>
