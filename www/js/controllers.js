@@ -45,12 +45,33 @@ angular.module('starter.controllers', [])
   })
 
   .controller('ServerSettingCtrl', function ($scope, $http, $state) {
-    $scope.server_title = $state.params.server;
 
-    // TODO tempoary hard-coded values
-    $scope.sever_address = "127.0.0.1";
+    var server_id = $state.params.serverID;
+
+    // load JSON
+    $http.get('data/servers.json').success(
+      function (data) {
+        $scope.server_title = data[server_id].title;
+        $scope.timestamps = data[server_id].timestamps;
+        $scope.notifications = data[server_id].notifications;
+        $scope.highlights = data[server_id].highlights;
+        $scope.address = data[server_id].address;
+        $scope.nick = data[server_id].nick;
+        $scope.channels = data[server_id].channels;
+
+        
+        console.log($scope.timestamps);
+      });
+
+    $scope.$on("$ionicView.loaded",
+      function ($scope) {
+        // console.log($scope);
+      }
+    );
+
+
 
     // debug stuff
-    console.log($state.params);
-    console.log($scope);
+    // console.log($state.params);
+    // console.log($scope);
   });

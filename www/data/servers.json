@@ -1,0 +1,15 @@
+{
+    "server1": {
+        "title": "GTS",
+        "address" : "192.168.1.169",
+        "nick": "sekibanki",
+        "notifications": "in_app",
+        "highlights": [
+            "Test Highlight",
+            "Test Highlight 2"],
+        "channels": [
+            "#general",
+            "#dev"],
+        "timestamps": "true"
+    }
+}
