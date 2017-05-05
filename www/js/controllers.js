@@ -59,8 +59,8 @@ angular.module('starter.controllers', [])
         $scope.nick = data[server_id].nick;
         $scope.channels = data[server_id].channels;
 
-        
-        console.log($scope.timestamps);
+
+        console.log($scope.highlights);
       });
 
     $scope.$on("$ionicView.loaded",

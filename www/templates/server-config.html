@@ -8,9 +8,9 @@
             <ion-item>
                 <ion-list>
                     <ion-list-header>Notifications</ion-list-heder>
-                    <ion-radio ng-model="notifications" value="full">Full</ion-radio>
-                    <ion-radio ng-model="notifications" value="in_app">In-App</ion-radio>
-                    <ion-radio ng-model="notifications" value="none">None</ion-radio>
+                        <ion-radio ng-model="notifications" value="full">Full</ion-radio>
+                        <ion-radio ng-model="notifications" value="in_app">In-App</ion-radio>
+                        <ion-radio ng-model="notifications" value="none">None</ion-radio>
                 </ion-list>
             </ion-item>
             <ion-item>
@@ -21,21 +21,18 @@
                     </button>
                 </div>
                 <ion-list>
-                    <ion-item>
-                        Test Highlight
-                    </ion-item>
-                    <ion-item>
-                        Test Highlight 2
+                    <ion-item ng-repeat="h in highlights">
+                        {{h}}
                     </ion-item>
                 </ion-list>
             </ion-item>
             <ion-item>
-                <ion-label fixed>Address</ion-label>
-                <ion-input type="text">{{address}}</ion-input>
+                <ion-label class="stacked">Address</ion-label>
+                <input type="text" ng-model="address" clearInput="true"></input>
             </ion-item>
             <ion-item>
-                <ion-label>Nick</ion-label>
-                <ion-input type="text">{{nick}}</ion-input>
+                <ion-label stacked class="stacked">Nick</ion-label>
+                <input type="text" ng-model="nick" clearInput="true"></input>
             </ion-item>
             <ion-item>
                 <div class="flex-wrapper-justify">
@@ -44,11 +41,8 @@
                         <i class="icon ion-android-add"></i>
                         </div>
                 <ion-list>
-                    <ion-item class="monospace">
-                        #general
-                    </ion-item>
-                    <ion-item class="monospace">
-                        #dev
+                     <ion-item ng-repeat="c in channels">
+                        {{c}}
                     </ion-item>
                 </ion-list>
             </ion-item>
