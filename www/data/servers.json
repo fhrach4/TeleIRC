@@ -1,15 +1,36 @@
 {
-    "server1": {
-        "title": "GTS",
-        "address" : "192.168.1.169",
-        "nick": "sekibanki",
-        "notifications": "in_app",
-        "highlights": [
-            "Test Highlight",
-            "Test Highlight 2"],
-        "channels": [
-            "#general",
-            "#dev"],
-        "timestamps": "true"
+    "servers": {
+        "aX4j9Z": {
+            "id": "aX4j9Z",
+            "title": "GTS",
+            "address": "192.168.1.169",
+            "nick": "sekibanki",
+            "notifications": "in_app",
+            "highlights": [
+                "Test Highlight",
+                "Test Highlight 2"
+            ],
+            "channels": [
+                "#general",
+                "#dev"
+            ],
+            "timestamps": "true"
+        },
+        "2b76C9": {
+            "id": "2b76C9",
+            "title": "GTS2",
+            "address": "192.168.1.169",
+            "nick": "sekibanki",
+            "notifications": "in_app",
+            "highlights": [
+                "Test Highlight",
+                "Test Highlight 2"
+            ],
+            "channels": [
+                "#general",
+                "#dev"
+            ],
+            "timestamps": "true"
+        }
     }
 }

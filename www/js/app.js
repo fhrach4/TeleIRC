@@ -49,6 +49,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       })
 
+      .state('app.chat', {
+        url: '/chat/:serverID',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/chat.html',
+            controller: 'ChatCtrl'
+          }
+        }
+      })
+
       .state('app.config', {
         url: '/servers/config/:serverID',
         views: {

@@ -1,8 +1,16 @@
-<ion-view view-title="servers">
+<ion-view view-title="TeleIRC">
     <ion-content>
-        <!--<ion-nav-bar class="bar-stable">Servers</ion-nav-bar>-->
+        <ion-nav-bar class="bar-stable">Servers</ion-nav-bar>
         <h1>Servers</h1>
-        <ion-grid>
-        </ion-grid>
+        <ion-list>
+            <ion-item ng-repeat="s in servers">
+                <a href="#/app/chat/{{s.id}}">
+                    <div>
+                        <h4>{{s.title}}</h4>
+                        <i class="ion-chevron-right"></i>
+                    </div>
+                </a>
+            </ion-item>
+        </ion-list>
     </ion-content>
 </ion-view>
