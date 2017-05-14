@@ -31,5 +31,11 @@ angular.module('starter.controllers', [])
     })
   })
 
-  .controller('ChatCtrl', function ($scope, $http, $state, ircListener) {
+  .controller('ChatCtrl', function ($scope, $http, $state, serverSettings, ircListener) {
+    var server_id = $state.params.serverID;
+    
+    serverSettings.get(server_id).then(function (data) {
+      console.log(data);
+      $scope.title = data.title;
+    })
   });

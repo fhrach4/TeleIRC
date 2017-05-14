@@ -6,9 +6,9 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'ngCordova'])
 
-  .run(function ($ionicPlatform) {
+  .run(function ($ionicPlatform, $cordovaSQLite, $rootScope) {
   $ionicPlatform.ready(function () {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -21,6 +21,11 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    $rootScope.db = window.openDatabase("debsList.db", '1.0', 'Chats', 65536);
+
+    $cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS chats (messageID, time, contents)");
+
   });
 })
 
