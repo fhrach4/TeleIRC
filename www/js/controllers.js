@@ -1,6 +1,10 @@
 angular.module('starter.controllers', [])
 
-  .controller('AppCtrl', function ($scope) {
+  .controller('AppCtrl', function ($scope, serverSettings) {
+    serverSettings.all().then(function (data) {
+      console.log(data);
+      $scope.servers = data;
+    })
   })
 
   .controller('ServerCtrl', function ($scope, $http, $state, serverSettings) {
@@ -9,13 +13,6 @@ angular.module('starter.controllers', [])
       console.log(data);
       $scope.servers = data;
     })
-
-    // load JSON
-    // $http.get('data/servers.json').success(
-    //   function (data) {
-    //     $scope.servers = data["servers"];
-    //   }
-    // );
   })
 
   .controller('ServerSettingCtrl', function ($scope, $http, $state, ircListener, serverSettings) {
@@ -32,18 +29,6 @@ angular.module('starter.controllers', [])
       $scope.nick = data[server_id].nick;
       $scope.channels = data[server_id].channels;
     })
-
-    // load JSON
-    // $http.get('data/servers.json').success(
-    //   function (data) {
-    //     $scope.server_title = data[server_id].title;
-    //     $scope.timestamps = data[server_id].timestamps;
-    //     $scope.notifications = data[server_id].notifications;
-    //     $scope.highlights = data[server_id].highlights;
-    //     $scope.address = data[server_id].address;
-    //     $scope.nick = data[server_id].nick;
-    //     $scope.channels = data[server_id].channels;
-    //   });
   })
 
   .controller('ChatCtrl', function ($scope, $http, $state, ircListener) {
