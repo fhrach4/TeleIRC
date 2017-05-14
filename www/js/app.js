@@ -6,28 +6,34 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'ngCordova'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
 
   .run(function ($ionicPlatform, $cordovaSQLite, $rootScope) {
-  $ionicPlatform.ready(function () {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
+    $ionicPlatform.ready(function () {
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+      // for form inputs)
+      if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        cordova.plugins.Keyboard.disableScroll(true);
 
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
+      }
+      if (window.StatusBar) {
+        // org.apache.cordova.statusbar required
+        StatusBar.styleDefault();
+      }
 
-    $rootScope.db = window.openDatabase("debsList.db", '1.0', 'Chats', 65536);
+      $rootScope.db = window.openDatabase("debsList.db", '1.0', 'Chats', 65536);
 
-    $cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS chats (messageID, time, contents)");
+      $cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS tblChats (serverID, messageID, time, contents)").then(function () {
+        console.log("DB Created");
+      })
 
-  });
-})
+      // INSERT TEST DATA
+      // $cordovaSQLite.execute($rootScope.db,"INSERT INTO tblChats (serverID, messageID, time, contents) VALUES (?,?,?,?)", ['aX4j9Z', '1', '10:00', 'test message']).then(function () {
+      //   console.log("TEST DATA Added");
+      // });
+    });
+  })
 
   .config(function ($stateProvider, $urlRouterProvider) {
 
@@ -56,7 +62,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'n
       })
 
       .state('app.chat', {
-        url: '/chat/:serverID',
+        url: '/chat/:serverID/:channel',
         views: {
           'menuContent': {
             templateUrl: 'templates/chat.html',

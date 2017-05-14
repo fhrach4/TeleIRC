@@ -1,7 +1,12 @@
 angular.module('starter.services', [])
 
-  .factory("ircListener", function () {
-    return {};
+  .factory("ircListener", function ($cordovaSQLite) {
+    return {
+      showDatabases: function (db) {
+        console.log("running db query");
+        return $cordovaSQLite.execute(db, "SELECT * FROM tblChats");
+      }
+    }
   })
 
   .factory("serverSettings", function ($q, $http) {

@@ -11,8 +11,8 @@
                 "Test Highlight 2"
             ],
             "channels": [
-                "#general",
-                "#dev"
+                "general",
+                "dev"
             ],
             "timestamps": "true"
         },
@@ -27,8 +27,8 @@
                 "Test Highlight 2"
             ],
             "channels": [
-                "#general",
-                "#dev"
+                "general",
+                "dev"
             ],
             "timestamps": "true"
         }
