@@ -22,16 +22,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         StatusBar.styleDefault();
       }
 
-      $rootScope.db = window.openDatabase("debsList.db", '1.0', 'Chats', 65536);
+      $rootScope.db = window.openDatabase("teleIRC.db", '1.0', 'Chats', 65536);
 
-      $cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS tblChats (serverID, messageID, time, contents)").then(function () {
+      // FOR DEBUG USE ONLY!!!!
+      // $cordovaSQLite.execute($rootScope.db, "DROP TABLE IF EXISTS tblChats;").then( function () {
+      //   console.log("DATABASE DELETED!")
+      // });
+
+
+      $cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS tblChats (serverID, channel, messageID, time, sender, contents)").then(function () {
         console.log("DB Created");
       })
 
       // INSERT TEST DATA
-      // $cordovaSQLite.execute($rootScope.db,"INSERT INTO tblChats (serverID, messageID, time, contents) VALUES (?,?,?,?)", ['aX4j9Z', '1', '10:00', 'test message']).then(function () {
-      //   console.log("TEST DATA Added");
-      // });
+    //   $cordovaSQLite.execute($rootScope.db, "INSERT INTO tblChats (serverID, channel, messageID, time, sender, contents) VALUES (?,?,?,?,?,?)", ['aX4j9Z', 'general', '1', new Date().getTime(), 'test_user', 'test message']);
     });
   })
 

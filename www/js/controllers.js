@@ -43,9 +43,29 @@ angular.module('starter.controllers', [])
       $scope.serverID = data.id;
     })
 
-    var db = ircListener.showDatabases($scope.db);
+    var db = ircListener.getAll($scope.db);
     db.then(function(result) {
-      console.log("asdf");
-      console.log(result);
+      var results = [];
+
+      // passing in result.rows crashes on infinite loop for some reason, whatever, this works
+      for(var i = 0; i < result.rows.length; i++) {
+        var date = new Date(result.rows[i].time);
+        console.log(date);
+
+        var message = {};
+         message.channel = result.rows[i].channel;
+         message.contents = result.rows[i].contents;
+         message.messageID = result.rows[i].messagID;
+         message.sender= result.rows[i].sender;
+         message.serverID = result.rows[i].serverID;
+         message.time = date.toLocaleTimeString();
+        results.push(message);
+      }
+
+      // TODO Ensure that the messages are sorted by time
+      // THis should be done in the SQL query
+
+      console.log(results);
+      $scope.history = results;
     });
   });

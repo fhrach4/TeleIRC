@@ -7,7 +7,9 @@
         <h3>{{channel}}</h1>
 
             <ion-list style="height: 80%; min-height: 300px;">
-                <!--TODO populate with real chat data-->
+                <ion-item ng-repeat="message in history">
+                    {{message.time}}-[{{message.sender}}]:{{message.contents}}
+                </ion-item>
             </ion-list>
             <ion-item>
                 <div style="display: float">
