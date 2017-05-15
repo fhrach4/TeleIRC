@@ -2,9 +2,11 @@ angular.module('starter.services', [])
 
   .factory("ircListener", function ($cordovaSQLite) {
     return {
-      getAll: function (db) {
-        console.log("running db query");
-        return $cordovaSQLite.execute(db, "SELECT * FROM tblChats ORDER BY time");
+      getAll: function (db, serverID, channel) {
+        var querry = "SELECT * FROM tblChats WHERE (channel == '" + channel + "' AND serverID == '" + serverID + "') ORDER BY time;"
+        console.log(querry);
+        return $cordovaSQLite.execute(db, querry);
+        // return $cordovaSQLite.execute(db, "SELECT * FROM tblChats WHERE serverID == 'aX4j9Z' AND channel == 'general' ORDER BY time;");
       },
 
       saveMessage: function(db, message) {

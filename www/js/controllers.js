@@ -43,7 +43,7 @@ angular.module('starter.controllers', [])
       $scope.serverID = data.id;
     })
 
-    var db = ircListener.getAll($scope.db);
+    var db = ircListener.getAll($scope.db, server_id, $scope.channel);
     db.then(function(result) {
       var results = [];
 

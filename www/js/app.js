@@ -32,10 +32,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
       $cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS tblChats (serverID, channel, messageID, time, sender, contents)").then(function () {
         console.log("DB Created");
-      })
+      });
 
       // INSERT TEST DATA
-    //   $cordovaSQLite.execute($rootScope.db, "INSERT INTO tblChats (serverID, channel, messageID, time, sender, contents) VALUES (?,?,?,?,?,?)", ['aX4j9Z', 'general', '1', new Date().getTime(), 'test_user', 'test message']);
+    //   $cordovaSQLite.execute($rootScope.db, "INSERT INTO tblChats (serverID, channel, messageID, time, sender, contents) VALUES (?,?,?,?,?,?)", ['aX4j9Z', 'dev', '1', new Date().getTime(), 'test_user', 'test message']);
     });
   })
 
