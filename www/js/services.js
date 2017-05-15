@@ -9,7 +9,7 @@ angular.module('starter.services', [])
         // return $cordovaSQLite.execute(db, "SELECT * FROM tblChats WHERE serverID == 'aX4j9Z' AND channel == 'general' ORDER BY time;");
       },
 
-      saveMessage: function(db, message) {
+      sendMessage: function(db, message) {
         console.log("saving message: " + message)
         var contents = message.contents;
 
@@ -17,10 +17,13 @@ angular.module('starter.services', [])
         var messageID = 0;
 
         var server = message.server;
-        var cahnnel = message.channel;
-        var time = message.time;
+        var channel = message.channel;
+        var time= message.time;
+        var sender = message.sender;
 
-        var query = "INSERT INTO tblChats (serverID, channel messageID, time, contents) VALUES (?,?,?,?,?)";
+        var query = "INSERT INTO tblChats (serverID, channel, messageID, time, sender, contents) VALUES (?,?,?,?,?,?)";
+        console.log(query);
+        console.log( [server, channel, messageID, time, sender, contents]);
         $cordovaSQLite.execute(db, query, [server, channel, messageID, time, sender, contents]);
       }
     }
