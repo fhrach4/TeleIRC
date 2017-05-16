@@ -54,6 +54,18 @@ angular.module('starter.services', [])
         var query = "SELECT * FROM tblHighlights WHERE serverID == '" + serverID + "';";
         console.log(query);
         return $cordovaSQLite.execute(db, query);
+      },
+
+      addChannel: function(db, serverID, newChannel) {
+        var query = "INSERT INTO tblChannels VALUES ('" + serverID + "', '" + newChannel + "');";
+        console.log(query);
+        $cordovaSQLite.execute(db, query);
+      },
+
+      addHighlight: function(db, serverID, newHighlight) {
+        var query = "INSERT INTO tblHighlights VALUES ('" + serverID + "', '" + newHighlight + "');";
+        console.log(query);
+        $cordovaSQLite.execute(db, query);
       }
     }
   });

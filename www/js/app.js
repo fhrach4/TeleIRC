@@ -47,12 +47,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       $cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS tblChannels (serverID, channel)").then(function () {
         console.log("channelDB Created");
       });
-
-      // INSERT TEST DATA
-      //   $cordovaSQLite.execute($rootScope.db, "INSERT INTO tblChats (serverID, channel, messageID, time, sender, contents) VALUES (?,?,?,?,?,?)", ['aX4j9Z', 'dev', '1', new Date().getTime(), 'test_user', 'test message']);
-
-      // $cordovaSQLite.execute($rootScope.db, "INSERT INTO tblServers (serverID, title, address, nick, notifications, highlights, channels, timestamps) VALUES (?,?,?,?,?,?,?,?,)", ['aX4j9Z', 'TestServer', '192.168.1.169', 'sekibanki', 'in_app', 
-
     });
   })
 

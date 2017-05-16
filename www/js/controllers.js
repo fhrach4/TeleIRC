@@ -29,20 +29,8 @@ angular.module('starter.controllers', [])
     })
   })
 
-  .controller('ServerSettingCtrl', function ($scope, $http, $state, ircListener, serverSettings) {
+  .controller('ServerSettingCtrl', function ($scope, $http, $state, ircListener, serverSettings, $ionicPopup) {
     var server_id = $state.params.serverID;
-    // serverSettings.settings().then(function (data) {
-    //   // console.log(data);
-    //   $scope.server_title = data[server_id].title;
-    //   $scope.timestamps = data[server_id].timestamps;
-    //   $scope.notifications = data[server_id].notifications;
-    //   $scope.highlights = data[server_id].highlights;
-    //   $scope.address = data[server_id].address;
-    //   $scope.nick = data[server_id].nick;
-    //   $scope.channels = data[server_id].channels;
-    // });
-
-    console.log(server_id);
 
     serverSettings.settings($scope.db, server_id).then(function (data) {
       var data = data.rows[0];
@@ -52,30 +40,105 @@ angular.module('starter.controllers', [])
       $scope.highlights = data.highlights;
       $scope.address = data.address;
       $scope.nick = data.nick;
-
-      console.log($scope.highlights);
     });
 
-    serverSettings.channels($scope.db, server_id).then(function (data) {
-      var results = [];
-      for (var i = 0; i < data.rows.length; i++) {
-        results.push(data.rows[i].channel);
-      }
+    $scope.updateChannels = function () {
+      serverSettings.channels($scope.db, server_id).then(function (data) {
+        var results = [];
+        for (var i = 0; i < data.rows.length; i++) {
+          results.push(data.rows[i].channel);
+        }
 
-      $scope.channels = results;
-    });
+        $scope.channels = results;
+      });
+    }
+    $scope.updateChannels();
 
-    serverSettings.highlights($scope.db, server_id).then(function (data) {
-      var results = [];
-      for (var i = 0; i < data.rows.length; i++) {
-        results.push(data.rows[i].highlight);
-      }
+    $scope.updateHighlights = function () {
+      serverSettings.highlights($scope.db, server_id).then(function (data) {
+        var results = [];
+        for (var i = 0; i < data.rows.length; i++) {
+          results.push(data.rows[i].highlight);
+        }
 
-      $scope.highlights = results;
-    });
+        $scope.highlights = results;
+      });
+    }
+    $scope.updateHighlights();
 
     $scope.saveSettings = function () {
+    };
 
+    $scope.addChannel = function () {
+      serverSettings.addChannel($scope.db, server_id, $scope.data.newChannel);
+    }
+
+    $scope.addHighlight = function () {
+      serverSettings.addHighlight($scope.db, server_id, $scope.data.newHighlight);
+    }
+
+    $scope.showChannelDialogue = function () {
+      $scope.data = {};
+
+      var popup = $ionicPopup.show({
+        template: "<input type = 'text' ng-model = 'data.newChannel'>",
+        title: 'New Auto-Join Channel',
+        scope: $scope,
+
+        buttons: [
+          { text: 'Cancel' }, {
+            text: '<b>Save</b>',
+            type: 'button-positive',
+            onTap: function (e) {
+
+              if (!$scope.data.newChannel) {
+                //don't allow the user to  unless he enters model...
+                console.log($scope.data.newChannel);
+                e.preventDefault();
+              } else {
+                return $scope.data.newChannel;
+              }
+            }
+          }
+        ]
+      })
+
+      popup.then(function (res) {
+        $scope.addChannel();
+        $scope.updateChannels();
+      });
+    };
+
+    $scope.showHighlightDialogue = function () {
+      $scope.data = {};
+
+      var popup = $ionicPopup.show({
+        template: "<input type = 'text' ng-model = 'data.newHighlight'>",
+        title: 'New Highlight',
+        scope: $scope,
+
+        buttons: [
+          { text: 'Cancel' }, {
+            text: '<b>Save</b>',
+            type: 'button-positive',
+            onTap: function (e) {
+
+              if (!$scope.data.newHighlight) {
+                //don't allow the user to  unless he enters model...
+                console.log($scope.data.newHighlight);
+                e.preventDefault();
+              } else {
+                return $scope.data.newHighlight;
+              }
+            }
+          }
+        ]
+      })
+
+      popup.then(function (res) {
+        $scope.addHighlight();
+        $scope.updateHighlights();
+      });
     };
   })
 
@@ -114,6 +177,7 @@ angular.module('starter.controllers', [])
 
         $scope.updateChat();
       };
+
       $scope.updateChat = function () {
         var db = ircListener.getAll($scope.db, server_id, $scope.channel);
         db.then(function (result) {
