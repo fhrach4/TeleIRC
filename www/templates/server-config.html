@@ -21,7 +21,7 @@
                     </button>
                 </div>
                 <ion-list>
-                    <ion-item ng-repeat="h in highlights">
+                    <ion-item ng-repeat="h in highlights" on-hold="removeHighlight($event)">
                         {{h}}
                     </ion-item>
                 </ion-list>

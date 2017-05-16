@@ -77,6 +77,31 @@ angular.module('starter.controllers', [])
       serverSettings.addHighlight($scope.db, server_id, $scope.data.newHighlight);
     }
 
+    $scope.removeHighlight = function ($event, value) {
+
+      $scope.data = {};
+      $scope.data.highlight = $event.currentTarget.innerHTML.trim();
+
+      var popup = $ionicPopup.show({
+        title: 'Delete Highlight',
+        scope: $scope,
+
+        buttons: [
+          { text: 'Cancel' }, {
+            text: '<b>Delete</b>',
+            type: 'button-warning',
+            onTap: function (e) {
+              serverSettings.deleteHighlight($scope.db, server_id, $scope.data.highlight);
+            }
+          }
+        ]
+      })
+
+      popup.then( function() {
+        $scope.updateHighlights();
+      });
+    }
+
     $scope.showChannelDialogue = function () {
       $scope.data = {};
 
@@ -140,6 +165,8 @@ angular.module('starter.controllers', [])
         $scope.updateHighlights();
       });
     };
+
+
   })
 
   .controller('ChatCtrl', function ($scope, $http, $state, serverSettings, ircListener) {

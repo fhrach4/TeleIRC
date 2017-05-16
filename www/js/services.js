@@ -66,6 +66,12 @@ angular.module('starter.services', [])
         var query = "INSERT INTO tblHighlights VALUES ('" + serverID + "', '" + newHighlight + "');";
         console.log(query);
         $cordovaSQLite.execute(db, query);
+      },
+
+      deleteHighlight: function(db, serverID, highlight) {
+        var query = "DELETE FROM tblHighlights WHERE (serverID = '" + serverID + "' AND highlight = '" + highlight + "');"
+        console.log(query);
+        $cordovaSQLite.execute(db, query);
       }
     }
   });
