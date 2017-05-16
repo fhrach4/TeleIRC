@@ -6,9 +6,11 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
+
+
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
 
-  .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicScrollDelegate) {
+  .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicScrollDelegate, $cordovaFile) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -34,11 +36,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         console.log("DB Created");
       });
 
+      $cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS tblServers (serverID, title, address, nick, notifications, timestamps)").then(function () {
+        console.log("serverDB Created");
+      })
+
+      $cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS tblHighlights (serverID, highlight)").then(function () {
+        console.log("highlightDB Created");
+      });
+
+      $cordovaSQLite.execute($rootScope.db, "CREATE TABLE IF NOT EXISTS tblChannels (serverID, channel)").then(function () {
+        console.log("channelDB Created");
+      });
+
       // INSERT TEST DATA
       //   $cordovaSQLite.execute($rootScope.db, "INSERT INTO tblChats (serverID, channel, messageID, time, sender, contents) VALUES (?,?,?,?,?,?)", ['aX4j9Z', 'dev', '1', new Date().getTime(), 'test_user', 'test message']);
 
-      // require(['irc'], function (irc) {
-      // });
+      // $cordovaSQLite.execute($rootScope.db, "INSERT INTO tblServers (serverID, title, address, nick, notifications, highlights, channels, timestamps) VALUES (?,?,?,?,?,?,?,?,)", ['aX4j9Z', 'TestServer', '192.168.1.169', 'sekibanki', 'in_app', 
+
     });
   })
 

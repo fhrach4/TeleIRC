@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
   .controller('AppCtrl', function ($scope, serverSettings) {
-    serverSettings.all().then(function (data) {
+    serverSettings.names($scope.db).then(function (data) {
       // console.log(data);
       $scope.servers = data;
     })
@@ -9,26 +9,38 @@ angular.module('starter.controllers', [])
 
   .controller('ServerCtrl', function ($scope, $http, $state, serverSettings) {
 
-    serverSettings.all().then(function (data) {
-      // console.log(data);
-      $scope.servers = data;
+    serverSettings.names($scope.db).then(function (data) {
+      var results = [];
+      for(var i = 0; i < data.rows.length; i++)
+      {
+        var server = {}
+        server.title = data.rows[i].title;
+        server.id = data.rows[i].serverID;
+        results.push(server);
+      }
+
+      $scope.servers = results;
     })
   })
 
   .controller('ServerSettingCtrl', function ($scope, $http, $state, ircListener, serverSettings) {
     var server_id = $state.params.serverID;
-    var data = serverSettings.get(server_id);
+    var data = serverSettings.setting(server_id);
 
-    serverSettings.all().then(function (data) {
-      // console.log(data);
-      $scope.server_title = data[server_id].title;
-      $scope.timestamps = data[server_id].timestamps;
-      $scope.notifications = data[server_id].notifications;
-      $scope.highlights = data[server_id].highlights;
-      $scope.address = data[server_id].address;
-      $scope.nick = data[server_id].nick;
-      $scope.channels = data[server_id].channels;
-    })
+    // serverSettings.settings().then(function (data) {
+    //   // console.log(data);
+    //   $scope.server_title = data[server_id].title;
+    //   $scope.timestamps = data[server_id].timestamps;
+    //   $scope.notifications = data[server_id].notifications;
+    //   $scope.highlights = data[server_id].highlights;
+    //   $scope.address = data[server_id].address;
+    //   $scope.nick = data[server_id].nick;
+    //   $scope.channels = data[server_id].channels;
+    // });
+
+    $scope.saveSettings = function() {
+      
+    };
   })
 
   .controller('ChatCtrl', function ($scope, $http, $state, serverSettings, ircListener) {
@@ -37,19 +49,22 @@ angular.module('starter.controllers', [])
       'submit': ""
     };
 
-
-
-
-    console.log($state.params);
     var server_id = $state.params.serverID;
     $scope.channel = $state.params.channel;
 
-    serverSettings.get(server_id).then(function (data) {
-      // console.log(data);
-      $scope.title = data.title;
-      $scope.channels = data.channels;
-      $scope.serverID = data.id;
-      $scope.nick = data.nick;
+    serverSettings.channels($scope.db, server_id).then(function (data) {
+        var results = [];
+        for(var i = 0; i < data.rows.length; i++) {
+          results.push(data.rows[i].channel);
+        }
+
+        $scope.channels = results;
+    });
+
+    serverSettings.settings($scope.db, server_id).then(function (data) {
+      $scope.title = data.rows[0].title;
+      $scope.serverID = server_id;
+      $scope.nick = data.rows[0].nick;
 
       $scope.chatSubmit = function () {
         ircListener.sendMessage($scope.db, {
@@ -81,9 +96,6 @@ angular.module('starter.controllers', [])
             message.time = date.toLocaleTimeString();
             results.push(message);
           }
-
-          // TODO Ensure that the messages are sorted by time
-          // THis should be done in the SQL query
 
           console.log(results);
           $scope.history = results;
