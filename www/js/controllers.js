@@ -45,22 +45,52 @@ angular.module('starter.controllers', [])
       });
     };
 
+    $scope.removeServer = function ($event) {
+
+      $scope.data = {};
+      $scope.data.serverID = $event.currentTarget.id;
+
+
+      var popup = $ionicPopup.show({
+        title: 'Delete Server',
+        scope: $scope,
+
+        buttons: [
+          { text: 'Cancel' }, {
+            text: '<b>Delete</b>',
+            type: 'button-danger',
+            onTap: function (e) {
+              serverSettings.deleteServer($scope.db, $scope.data.serverID);
+            }
+          }
+        ]
+      })
+
+      popup.then(function () {
+        $scope.updateServerList();
+      });
+    };
+
     $scope.updateServerList();
   })
 
-  .controller('ServerCtrl', function ($scope, $http, $state, serverSettings) {
+  .controller('ServerCtrl', function ($rootScope, $scope, $state, serverSettings) {
 
-    serverSettings.names($scope.db).then(function (data) {
-      var results = [];
-      for (var i = 0; i < data.rows.length; i++) {
-        var server = {}
-        server.title = data.rows[i].title;
-        server.id = data.rows[i].serverID;
-        results.push(server);
-      }
+    $rootScope.updateServerList = function () {
+      serverSettings.names($scope.db).then(function (data) {
+        var results = [];
+        for (var i = 0; i < data.rows.length; i++) {
+          var server = {}
+          server.title = data.rows[i].title;
+          server.id = data.rows[i].serverID;
+          results.push(server);
+        }
 
-      $scope.servers = results;
-    })
+        $scope.servers = results;
+      })
+    };
+
+    $scope.updateServerList();
   })
 
   .controller('ServerSettingCtrl', function ($scope, $http, $state, ircListener, serverSettings, $ionicPopup) {

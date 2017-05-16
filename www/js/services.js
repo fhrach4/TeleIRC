@@ -113,7 +113,12 @@ angular.module('starter.services', [])
         var uid = random() + random() + random() + random() + random() + random();
         var query = "INSERT INTO tblServers (serverID, title) VALUES ('" + uid + "', '" + serverName + "');";
         $cordovaSQLite.execute(db, query);
+      },
 
+      deleteServer: function (db, serverID) {
+        var query = "DELETE FROM tblServers WHERE serverID == '" + serverID + "';";
+        console.log(query);
+        $cordovaSQLite.execute(db, query);
       }
     }
   });
