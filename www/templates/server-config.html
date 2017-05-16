@@ -40,9 +40,10 @@
                     <ion-label>Auto-Join Channels</ion-label>
                     <button class="button outline button-small flex10" ng-click="showChannelDialogue()">
                         <i class="icon ion-android-add"></i>
-                        </div>
+                    </button>
+                </div>
                 <ion-list>
-                     <ion-item ng-repeat="c in channels" on-hold="removeChannel($event)">
+                    <ion-item ng-repeat="c in channels" on-hold="removeChannel($event)">
                         {{c}}
                     </ion-item>
                 </ion-list>
@@ -55,6 +56,6 @@
             <a href="../../"><button class="button button-assertive button-full">
                 <i class="icon ion-android-cancel"></i> Cancel
             </button></a>
-                </div>
+        </div>
     </ion-content>
 </ion-view>

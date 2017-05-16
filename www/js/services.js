@@ -96,6 +96,24 @@ angular.module('starter.services', [])
         var query = "UPDATE tblServers SET timestamps = '" + value + "' WHERE serverID == '" + serverID + "';";
         console.log(query);
         $cordovaSQLite.execute(db, query);
+      },
+
+      setTimestamps: function (db, serverID, value) {
+        var query = "UPDATE tblServers SET timestamps = '" + value + "' WHERE serverID == '" + serverID + "';";
+        console.log(query);
+        $cordovaSQLite.execute(db, query);
+      },
+
+      createServer: function (db, serverName) {
+        var random = function () {
+          return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+        }
+        var uid = random() + random() + random() + random() + random() + random();
+        var query = "INSERT INTO tblServers (serverID, title) VALUES ('" + uid + "', '" + serverName + "');";
+        $cordovaSQLite.execute(db, query);
+
       }
     }
   });

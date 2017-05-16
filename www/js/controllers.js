@@ -1,17 +1,51 @@
 angular.module('starter.controllers', [])
 
-  .controller('AppCtrl', function ($scope, serverSettings) {
-    serverSettings.names($scope.db).then(function (data) {
-      var results = [];
-      for (var i = 0; i < data.rows.length; i++) {
-        var server = {}
-        server.title = data.rows[i].title;
-        server.id = data.rows[i].serverID;
-        results.push(server);
-      }
+  .controller('AppCtrl', function ($scope, serverSettings, $ionicPopup) {
+    $scope.updateServerList = function () {
+      serverSettings.names($scope.db).then(function (data) {
+        var results = [];
+        for (var i = 0; i < data.rows.length; i++) {
+          var server = {}
+          server.title = data.rows[i].title;
+          server.id = data.rows[i].serverID;
+          results.push(server);
+        }
 
-      $scope.servers = results;
-    })
+        $scope.servers = results;
+      });
+    }
+
+    $scope.showNewServerDialogue = function () {
+      $scope.data = {};
+      var popup = $ionicPopup.show({
+        template: "<input type = 'text' ng-model = 'data.serverName'>",
+        title: 'New Server',
+        scope: $scope,
+
+        buttons: [
+          { text: 'Cancel' }, {
+            text: '<b>Create</b>',
+            type: 'button-positive',
+            onTap: function (e) {
+
+              if (!$scope.data.serverName) {
+                e.preventDefault();
+              } else {
+                return $scope.data.newChannel;
+              }
+            }
+          }
+        ]
+      })
+
+      popup.then(function (res) {
+        console.log($scope.data.serverName);
+        serverSettings.createServer($scope.db, $scope.data.serverName);
+        $scope.updateServerList();
+      });
+    };
+
+    $scope.updateServerList();
   })
 
   .controller('ServerCtrl', function ($scope, $http, $state, serverSettings) {

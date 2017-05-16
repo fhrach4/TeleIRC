@@ -15,7 +15,11 @@
     <ion-side-menu side="right">
         <ion-header-bar class="bar-stable">
             <h1 class="title">Servers</h1>
+            <button class="button outline button-small flex10" ng-click="showNewServerDialogue()">
+                        <i class="icon ion-android-add"></i>
+                    </button>
         </ion-header-bar>
+
         <ion-content>
             <ion-list>
                 <ion-item ng-repeat="s in servers" href="#/app/servers/config/{{s.id}}">{{s.title}}</ion-item>
