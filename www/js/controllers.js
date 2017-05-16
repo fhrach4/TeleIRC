@@ -2,8 +2,15 @@ angular.module('starter.controllers', [])
 
   .controller('AppCtrl', function ($scope, serverSettings) {
     serverSettings.names($scope.db).then(function (data) {
-      // console.log(data);
-      $scope.servers = data;
+      var results = [];
+      for (var i = 0; i < data.rows.length; i++) {
+        var server = {}
+        server.title = data.rows[i].title;
+        server.id = data.rows[i].serverID;
+        results.push(server);
+      }
+
+      $scope.servers = results;
     })
   })
 
@@ -11,8 +18,7 @@ angular.module('starter.controllers', [])
 
     serverSettings.names($scope.db).then(function (data) {
       var results = [];
-      for(var i = 0; i < data.rows.length; i++)
-      {
+      for (var i = 0; i < data.rows.length; i++) {
         var server = {}
         server.title = data.rows[i].title;
         server.id = data.rows[i].serverID;
@@ -25,8 +31,6 @@ angular.module('starter.controllers', [])
 
   .controller('ServerSettingCtrl', function ($scope, $http, $state, ircListener, serverSettings) {
     var server_id = $state.params.serverID;
-    var data = serverSettings.setting(server_id);
-
     // serverSettings.settings().then(function (data) {
     //   // console.log(data);
     //   $scope.server_title = data[server_id].title;
@@ -38,8 +42,40 @@ angular.module('starter.controllers', [])
     //   $scope.channels = data[server_id].channels;
     // });
 
-    $scope.saveSettings = function() {
-      
+    console.log(server_id);
+
+    serverSettings.settings($scope.db, server_id).then(function (data) {
+      var data = data.rows[0];
+      $scope.server_title = data.title;
+      $scope.timestamps = data.timestamps;
+      $scope.notifications = data.notifications;
+      $scope.highlights = data.highlights;
+      $scope.address = data.address;
+      $scope.nick = data.nick;
+
+      console.log($scope.highlights);
+    });
+
+    serverSettings.channels($scope.db, server_id).then(function (data) {
+      var results = [];
+      for (var i = 0; i < data.rows.length; i++) {
+        results.push(data.rows[i].channel);
+      }
+
+      $scope.channels = results;
+    });
+
+    serverSettings.highlights($scope.db, server_id).then(function (data) {
+      var results = [];
+      for (var i = 0; i < data.rows.length; i++) {
+        results.push(data.rows[i].highlight);
+      }
+
+      $scope.highlights = results;
+    });
+
+    $scope.saveSettings = function () {
+
     };
   })
 
@@ -53,12 +89,12 @@ angular.module('starter.controllers', [])
     $scope.channel = $state.params.channel;
 
     serverSettings.channels($scope.db, server_id).then(function (data) {
-        var results = [];
-        for(var i = 0; i < data.rows.length; i++) {
-          results.push(data.rows[i].channel);
-        }
+      var results = [];
+      for (var i = 0; i < data.rows.length; i++) {
+        results.push(data.rows[i].channel);
+      }
 
-        $scope.channels = results;
+      $scope.channels = results;
     });
 
     serverSettings.settings($scope.db, server_id).then(function (data) {

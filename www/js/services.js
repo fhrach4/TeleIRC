@@ -48,6 +48,12 @@ angular.module('starter.services', [])
         var query = "SELECT * FROM tblChannels WHERE serverID == '" + serverID + "';";
         console.log(query);
         return $cordovaSQLite.execute(db, query);
+      },
+
+      highlights: function (db, serverID) {
+        var query = "SELECT * FROM tblHighlights WHERE serverID == '" + serverID + "';";
+        console.log(query);
+        return $cordovaSQLite.execute(db, query);
       }
     }
   });
