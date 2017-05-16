@@ -2,15 +2,16 @@
     <ion-content>
         <h1 class="title">{{server_title}}</h1>
         <ion-list>
-            <ion-item>
-                <ion-toggle checked="true" ng-model="timestamps" ng-checked="true">Timestamps</ion-toggle>
-            </ion-item>
+            <!--If I have time, get this to work-->
+            <!--<ion-item>
+                <ion-toggle ng-model="timestamps" ng-true-value="true">Timestamps</ion-toggle>
+            </ion-item>-->
             <ion-item>
                 <ion-list>
                     <ion-list-header>Notifications</ion-list-heder>
-                        <ion-radio ng-model="notifications" value="full">Full</ion-radio>
-                        <ion-radio ng-model="notifications" value="in_app">In-App</ion-radio>
-                        <ion-radio ng-model="notifications" value="none">None</ion-radio>
+                        <ion-radio ng-model="notifications" value="full" name="notifications">Full</ion-radio>
+                        <ion-radio ng-model="notifications" value="in_app" name="notifications">In-App</ion-radio>
+                        <ion-radio ng-model="notifications" value="none" name="notifications">None</ion-radio>
                 </ion-list>
             </ion-item>
             <ion-item>
@@ -28,11 +29,11 @@
             </ion-item>
             <ion-item>
                 <ion-label class="stacked">Address</ion-label>
-                <input type="text" ng-model="address" clearInput="true"></input>
+                <input id="inputAddress" type="text" ng-model="address" clearInput="true"></input>
             </ion-item>
             <ion-item>
                 <ion-label stacked class="stacked">Nick</ion-label>
-                <input type="text" ng-model="nick" clearInput="true"></input>
+                <input id="inputNick" type="text" ng-model="nick" clearInput="true"></input>
             </ion-item>
             <ion-item>
                 <div class="flex-wrapper-justify">
@@ -41,14 +42,14 @@
                         <i class="icon ion-android-add"></i>
                         </div>
                 <ion-list>
-                     <ion-item ng-repeat="c in channels">
+                     <ion-item ng-repeat="c in channels" on-hold="removeChannel($event)">
                         {{c}}
                     </ion-item>
                 </ion-list>
             </ion-item>
         </ion-list>
         <div class="center">
-            <button ion-button ng-click="saveSettings" class="button button-positive button-full">
+            <button ion-button ng-click="saveSettings()" class="button button-positive button-full">
                 <i class="icon ion-arrow-down-a"></i> Save
             </button>
             <a href="../../"><button class="button button-assertive button-full">

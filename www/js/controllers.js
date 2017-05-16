@@ -67,6 +67,10 @@ angular.module('starter.controllers', [])
     $scope.updateHighlights();
 
     $scope.saveSettings = function () {
+      serverSettings.setNick($scope.db, server_id, document.getElementById("inputNick").value);
+      serverSettings.setAddress($scope.db, server_id, document.getElementById("inputAddress").value);
+      // serverSettings.setTimestamps($scope.db, server_id, $scope.timestamps);
+      console.log($scope);
     };
 
     $scope.addChannel = function () {
@@ -74,6 +78,7 @@ angular.module('starter.controllers', [])
     }
 
     $scope.addHighlight = function () {
+
       serverSettings.addHighlight($scope.db, server_id, $scope.data.newHighlight);
     }
 
@@ -89,7 +94,7 @@ angular.module('starter.controllers', [])
         buttons: [
           { text: 'Cancel' }, {
             text: '<b>Delete</b>',
-            type: 'button-warning',
+            type: 'button-danger',
             onTap: function (e) {
               serverSettings.deleteHighlight($scope.db, server_id, $scope.data.highlight);
             }
@@ -97,8 +102,33 @@ angular.module('starter.controllers', [])
         ]
       })
 
-      popup.then( function() {
+      popup.then(function () {
         $scope.updateHighlights();
+      });
+    }
+
+    $scope.removeChannel = function ($event, value) {
+
+      $scope.data = {};
+      $scope.data.channel = $event.currentTarget.innerHTML.trim();
+
+      var popup = $ionicPopup.show({
+        title: 'Delete Auto-Join Channel',
+        scope: $scope,
+
+        buttons: [
+          { text: 'Cancel' }, {
+            text: '<b>Delete</b>',
+            type: 'button-danger',
+            onTap: function (e) {
+              serverSettings.deleteChannel($scope.db, server_id, $scope.data.channel);
+            }
+          }
+        ]
+      })
+
+      popup.then(function () {
+        $scope.updateChannels();
       });
     }
 
