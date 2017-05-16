@@ -25,6 +25,10 @@ angular.module('starter.services', [])
         console.log(query);
         console.log( [server, channel, messageID, time, sender, contents]);
         $cordovaSQLite.execute(db, query, [server, channel, messageID, time, sender, contents]);
+      },
+
+      listen: function(url) {
+        
       }
     }
   })

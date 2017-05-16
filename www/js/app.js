@@ -8,7 +8,7 @@
 
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
 
-  .run(function ($ionicPlatform, $cordovaSQLite, $rootScope) {
+  .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicScrollDelegate) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -35,7 +35,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       });
 
       // INSERT TEST DATA
-    //   $cordovaSQLite.execute($rootScope.db, "INSERT INTO tblChats (serverID, channel, messageID, time, sender, contents) VALUES (?,?,?,?,?,?)", ['aX4j9Z', 'dev', '1', new Date().getTime(), 'test_user', 'test message']);
+      //   $cordovaSQLite.execute($rootScope.db, "INSERT INTO tblChats (serverID, channel, messageID, time, sender, contents) VALUES (?,?,?,?,?,?)", ['aX4j9Z', 'dev', '1', new Date().getTime(), 'test_user', 'test message']);
+
+      // require(['irc'], function (irc) {
+      // });
     });
   })
 

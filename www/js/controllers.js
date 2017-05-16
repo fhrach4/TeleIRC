@@ -39,6 +39,7 @@ angular.module('starter.controllers', [])
 
 
 
+
     console.log($state.params);
     var server_id = $state.params.serverID;
     $scope.channel = $state.params.channel;

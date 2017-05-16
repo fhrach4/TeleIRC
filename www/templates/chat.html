@@ -1,20 +1,30 @@
 <ion-view view-title="{{title}}">
     <ion-content>
-        <ul>
-            <a href="#/app/chat/{{serverID}}/status"><li>Status</li></a>
-            <li ng-repeat="c in channels"><a href="#/app/chat/{{serverID}}/{{c}}">#{{c}}</a></li>
+        <ul class="channel-bar">
+            <li>
+                <button class="button button-small button-calm button-outline">
+                <a href="#/app/chat/{{serverID}}/status" class="calm">Status</a>
+                </button>
+            </li>
+            <li ng-repeat="c in channels">
+                <button class="button button-small button-calm button-outline">
+                <a href="#/app/chat/{{serverID}}/{{c}}" class="calm">#{{c}}</a>
+                </button>
+            </li>
         </ul>
-        <h3>{{channel}}</h1>
+        <h3>#{{channel}}</h1>
 
-            <ion-list style="height: 80%; min-height: 300px;">
-                <ion-item ng-repeat="message in history">
-                    {{message.time}}-[{{message.sender}}]:{{message.contents}}
-                </ion-item>
-            </ion-list>
+            <ion-scroll style="height: 60%;">
+                <ion-list>
+                    <ion-item ng-repeat="message in history">
+                        {{message.time}}-[{{message.sender}}]:{{message.contents}}
+                    </ion-item>
+                </ion-list>
+            </ion-scroll>
             <ion-item>
                 <div style="display: float">
                     <input type="text" style="float: left; width: 85%;" ng-model="input.submit"></input>
-                    <button class="button" style="float: right; width: 10%;" ng-click="chatSubmit();">Send</button>
+                    <button class="button button-small" style="float: right; width: 10%;" ng-click="chatSubmit();">Send</button>
                 </div>
             </ion-item>
     </ion-content>

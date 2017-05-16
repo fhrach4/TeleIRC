@@ -26,3 +26,22 @@
 .flex10 {
     width: 10%;
 }
+
+ul.channel-bar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.channel-bar li {
+    display: inline;
+    width: 150px;
+}
+
+ul.channel-bar li a {
+    text-decoration: none;
+    font-size: 16pt;
+}
+
+ul.channel-bar li a:visited {
+}
