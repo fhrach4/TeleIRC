@@ -292,7 +292,7 @@ angular.module('starter.controllers', [])
           'time': Date.now()
         }
         );
-
+        $scope.updateChat();
       };
 
       $scope.updateChat = function () {
