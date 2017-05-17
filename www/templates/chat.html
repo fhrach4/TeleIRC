@@ -2,14 +2,18 @@
     <ion-content>
         <ul class="channel-bar">
             <li>
+                <a href="#/app/chat/{{serverID}}/status" class="calm">
                 <button class="button button-small button-calm button-outline">
-                <a href="#/app/chat/{{serverID}}/status" class="calm">Status</a>
+                    Status
                 </button>
+                </a>
             </li>
             <li ng-repeat="c in channels">
+                <a href="#/app/chat/{{serverID}}/{{c}}">
                 <button class="button button-small button-calm button-outline">
-                <a href="#/app/chat/{{serverID}}/{{c}}" class="calm">#{{c}}</a>
+                    #{{c}}
                 </button>
+                </a>
             </li>
         </ul>
         <h3>{{channel}}</h1>
