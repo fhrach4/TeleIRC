@@ -18,7 +18,7 @@
         </ul>
         <h3>{{channel}}</h1>
 
-            <ion-scroll style="height: 60%;">
+            <ion-scroll style="height: 75%;">
                 <ion-list id="listMessages">
                     <ion-item ng-repeat="message in history">
                         {{message.time}}-[{{message.sender}}]:{{message.contents}}
@@ -27,8 +27,8 @@
             </ion-scroll>
             <ion-item>
                 <div style="display: float">
-                    <input type="text" style="float: left; width: 85%;" ng-model="input.submit"></input>
-                    <button class="button button-small" style="float: right; width: 10%;" ng-click="chatSubmit();">Send</button>
+                    <input id="inputChatbox" type="text" style="float: left; width: 85%;" ng-model="input.submit"></input>
+                    <button class="button button-small button-calm" style="float: right; width: 15%;" ng-click="chatSubmit();">Send <i class="ion-chevron-right"></i></button>
                 </div>
             </ion-item>
     </ion-content>

@@ -293,6 +293,7 @@ angular.module('starter.controllers', [])
         }
         );
         $scope.updateChat();
+        document.getElementById("inputChatbox").value = "";
       };
 
       $scope.updateChat = function () {
