@@ -6,9 +6,13 @@
         <ion-list>
             <ion-item ng-repeat="s in servers">
                 <a href="#/app/chat/{{s.id}}/status">
-                    <div>
-                        <h4>{{s.title}}</h4>
-                        <i class="ion-chevron-right"></i>
+                    <div style="display: float;">
+                        <div style="float:left;">
+                            <h4>{{s.title}}</h4>
+                        </div>
+                        <div style="float: right;">
+                            <i class="ion-chevron-right"></i>
+                        </div>
                     </div>
                 </a>
             </ion-item>

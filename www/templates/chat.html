@@ -19,7 +19,7 @@
         <h3>{{channel}}</h1>
 
             <ion-scroll style="height: 60%;">
-                <ion-list>
+                <ion-list id="listMessages">
                     <ion-item ng-repeat="message in history">
                         {{message.time}}-[{{message.sender}}]:{{message.contents}}
                     </ion-item>

@@ -260,7 +260,7 @@ angular.module('starter.controllers', [])
 
   })
 
-  .controller('ChatCtrl', function ($scope, $http, $state, serverSettings, ircListener) {
+  .controller('ChatCtrl', function ($scope, $state, $ionicScrollDelegate, serverSettings, ircListener) {
 
     $scope.input = {
       'submit': ""
@@ -293,7 +293,6 @@ angular.module('starter.controllers', [])
         }
         );
 
-        $scope.updateChat();
       };
 
       $scope.updateChat = function () {
@@ -318,6 +317,10 @@ angular.module('starter.controllers', [])
           console.log(results);
           $scope.history = results;
 
+
+          $scope.updateChat();
+          $ionicScrollDelegate.$getByHandle(document.getElementById('listMessages'));
+          $ionicScrollDelegate.scrollBottom();
 
         });
       };
