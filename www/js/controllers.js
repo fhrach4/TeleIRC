@@ -31,7 +31,7 @@ angular.module('starter.controllers', [])
               if (!$scope.data.serverName) {
                 e.preventDefault();
               } else {
-                return $scope.data.newChannel;
+                serverSettings.createServer($scope.db, $scope.data.serverName);
               }
             }
           }
@@ -40,7 +40,6 @@ angular.module('starter.controllers', [])
 
       popup.then(function (res) {
         console.log($scope.data.serverName);
-        serverSettings.createServer($scope.db, $scope.data.serverName);
         $scope.updateServerList();
       });
     };
@@ -215,7 +214,7 @@ angular.module('starter.controllers', [])
                 console.log($scope.data.newChannel);
                 e.preventDefault();
               } else {
-                return $scope.data.newChannel;
+                $scope.addChannel();
               }
             }
           }
@@ -223,7 +222,6 @@ angular.module('starter.controllers', [])
       })
 
       popup.then(function (res) {
-        $scope.addChannel();
         $scope.updateChannels();
       });
     };
@@ -247,7 +245,7 @@ angular.module('starter.controllers', [])
                 console.log($scope.data.newHighlight);
                 e.preventDefault();
               } else {
-                return $scope.data.newHighlight;
+                $scope.addHighlight();
               }
             }
           }
@@ -255,7 +253,6 @@ angular.module('starter.controllers', [])
       })
 
       popup.then(function (res) {
-        $scope.addHighlight();
         $scope.updateHighlights();
       });
     };
