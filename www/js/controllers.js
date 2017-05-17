@@ -318,7 +318,6 @@ angular.module('starter.controllers', [])
           $scope.history = results;
 
 
-          $scope.updateChat();
           $ionicScrollDelegate.$getByHandle(document.getElementById('listMessages'));
           $ionicScrollDelegate.scrollBottom();
 
